@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webserv</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@100&family=Roboto:ital,wght@1,300&display=swap" rel="stylesheet">
+</head>
+<style>
+
+    body{
+        margin-left: auto;
+        margin-right: auto;
+        width: 400px;
+        background-color: #fff;
+        
+        font-family: 'Geologica', sans-serif;
+font-family: 'Roboto', sans-serif;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+
+    }
+    form input{
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #8d8d8d;
+        border-radius: 4px;
+        
+    }
+    .link{   
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .link form input{
+        border:1px solid #8d8d8d;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        text-decoration: none;
+        background-color: #264653;
+        color: #fff;
+        border-radius: 4px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 60px;
+        padding-right: 60px;
+
+        width: 100%;
+        text-align: center;
+        
+    }
+    .btn{
+        background: #264653;
+        border-color:1px solid #a4a4a4;
+        color: #fff;
+    }
+    h1{
+        text-align: center;
+        color: #264653;
+    }
+    .titel {
+        display: flex;
+        margin-top: 30px;
+        color: #e76f51;
+        padding: 10px;
+    }
+    hr{
+        width: 33%;
+        background-color: #a4a4a4;
+        border: 1px solid #ffff;
+    }
+    textarea{
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #8d8d8d;
+        border-radius: 4px;
+    }
+    span{
+        color: #2a9d8f;
+    }
+    .copi{
+        margin-top: 30px;
+        text-align: end;
+        margin-right: 10px;
+        margin-left: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        color: #c4c4c4;
+    }
+    .copi a{
+        color: #2a9d8f;
+        font-size: 15px ;
+    }
+</style>
+<body>
+    <h1>webserv <span>1337</span></h1>
+    <div class="titel">
+        <hr>
+        <label for="">GET Methode</label>
+        <hr>
+    </div>
+    <div class="link">
+        <form action="/video" method="get">
+            <input type="submit" class="btn" value="GET vedio">
+        </form>
+        <form action="/text" method="get">
+            <input type="submit" class="btn" value="GET text">
+        </form>
+    </div>
+    <div class="titel">
+        <hr>
+        <label for="">POST Methode</label>
+        <hr>
+    </div>
+    <form action="/" method="POST" enctype="multipart/form-data" >
+        <input type="text" name="text"  id="" placeholder="@gmail.com">
+        <input type="file" name="file"  id="" multiple  >
+        <textarea name="text" id="textarea"   cols="30" rows="10" placeholder="large text"></textarea>
+        <input type="submit" class="btn" value="Post Data">
+    </form>
+   
+    <div class="titel">
+        <hr>
+        <label for="">DELET Methode</label>
+        <hr>
+    </div>
+    <form action="/delet_file" method="get">
+        <input type="submit" class="btn" value="Delet File">
+    </form>
+    <div class="titel">
+        <hr>
+        <label for="">CGI</label>
+        <hr>
+    </div>
+    <div class="link">
+        <form action="/cgi_php" method="get">
+            <input type="submit" class="btn" value="CGI php">
+        </form>
+        <form action="/cgi_python" method="get">
+            <input type="submit" class="btn" value="CGI python">
+        </form>
+    </div>
+    <h5 class="copi">@1337 by  <a href="">mjalloul</a> & <a href="">amrakibe</a></h5>
+    
+</body>
+</html>
