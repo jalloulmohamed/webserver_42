@@ -3,12 +3,19 @@
 
 int main(int argc, char** argv)
 {
-    if(argc != 2)
+    if(argc > 2)
         return  1; 
-    configFile parsingfile(argv[1],false);
-    parsingfile.parsing();
-    if(!parsingfile.validefile())
-        return 1;
+    if(argc == 2)
+    {
+        configFile parsingfile(argv[1],false);
+        parsingfile.parsing();
+        if(!parsingfile.validefile())
+            return 1;
+
+    }
+    // else {
+    //     default
+    // }
     // (void) argv;
     // //vectore for all  file descriptore 
     // std::vector<pollfd> all_df;
