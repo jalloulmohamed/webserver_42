@@ -15,7 +15,7 @@ client::client(int fd)
     this->req = "";
     this->fd =fd;
     this->contentlenght=0;
-    this->contentread; = 0;
+    this->contentread = 0;
     this->firstbuff = false;
 
 }
