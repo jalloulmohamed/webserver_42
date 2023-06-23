@@ -21,6 +21,7 @@ int main(int argc, char** argv)
     std::vector<client> all_client;
     std::vector<int> fd_server;
     std::string req;
+
     // create number of server
     server Server = server(8000);
     server Server2 = server(8001);
@@ -47,6 +48,8 @@ int main(int argc, char** argv)
         if(all_server[i].listenSrver())
             return 1;
     }
+
+
     // pooling and accept connection and parsing requist
     signal(SIGPIPE, SIG_IGN);
     while (true)
@@ -72,32 +75,36 @@ int main(int argc, char** argv)
                     fds.fd=  client_socket;
                     fds.events = POLLIN;
                     all_df.push_back(fds);
-                    // client newclient = client(fds.fd);
-                    // all_client.push_back(newclient);
-                    std::cout<< "server ==> "<<all_df[i].fd<<"   accept connection cleient ==> "<<client_socket<<std::endl;
+                    client newclient = client(fds.fd);
+                    all_client.push_back(newclient);
+                     std::cout<< "server ==> "<<all_df[i].fd<<"   accept connection cleient ==> "<<client_socket<<std::endl;
                 }
                 else
                 {
                     char buff[1024];
+                    std::memset(buff, '\0', sizeof(buff));
                     int content = read(all_df[i].fd,buff,1024);
-                    req.append(buff);
-                    // std::vector<client>::iterator it = std::find(all_client.begin() , all_client.end(), all_df[i].fd);
-                    // if(it != all_client.end())
-                    // {
-                    //     std::cout<<"find it"<<std::endl;
-
-                    // }
-                    if(content != 1024)
+                    for (size_t j = 0; j < all_client.size(); j++)
                     {
-                        std::string response = "HTTP/1.1 200 OK";
-                        response+= "Content-Length:" +  std::to_string(req.length()) + "\r\n\r\n";
-                        response += req;
-                        write(all_df[i].fd,response.c_str(),response.length());
-                        response="";
-                        close(all_df[i].fd);
-                        all_df.erase(all_df.begin() + i);
+                        if(all_client[j].getfd() == all_df[i].fd)
+                        {
+                            all_client[j].appendreq(buff,content);
+                            all_client[j].addcontenlenght(content);
+                            if(content != 1024)
+                            {
+                                std::string response = "HTTP/1.1 200 OK";
+                                response+= "Content-Length:" +  std::to_string(all_client[j].getreq().length()) + "\r\n\r\n";
+                                response += all_client[j].getreq();
+                                write(all_df[i].fd,response.c_str(),response.length());
+                                
+                                response="";
+                                close(all_df[i].fd);
+                                all_df.erase(all_df.begin() + i);
+                                all_client.erase(all_client.begin() + j);
+                                break;
+                            }
+                        }
                     }
-
                 }
             }
         } 
