@@ -35,6 +35,7 @@ std::string client::getreq() const
     return this->req;
 }
 
+
 void client::appendreq(char const *req, int count)
 {
     if(!this->firstbuff)
@@ -43,11 +44,10 @@ void client::appendreq(char const *req, int count)
         std::string input(req);
         int firstposition = input.find("Content-Length:");
         int lastposition = input.find("\n",firstposition);
-        this->contentread = -1 * lastposition;
-        std::string lent = input.substr(firstposition + 15,lastposition);
+        this->contentread = (-1 * lastposition) ;
+        std::string lent = input.substr(firstposition + 15,lastposition - firstposition);
         this->contentlenght= std::stoi(lent);
     }
-    
     this->req.append(req,count);
 }
 
