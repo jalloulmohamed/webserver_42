@@ -99,13 +99,13 @@ int main(int argc, char** argv)
                                 response += all_client[j].getreq();
                                 std::cout<<response.length()<<std::endl;
                                 write(all_df[i].fd,response.c_str(),response.length());
-                                std::string fileName = "example.txt";
-                                std::ofstream outputFile(fileName);
-                                if (outputFile.is_open()) {
-                                    outputFile << response;
-                                    outputFile.close();
-                                    std::cout << "File created and content written successfully." << std::endl;
-                                }
+                                // std::string fileName = "example.txt";
+                                // std::ofstream outputFile(fileName);
+                                // if (outputFile.is_open()) {
+                                //     outputFile << response;
+                                //     outputFile.close();
+                                //     std::cout << "File created and content written successfully." << std::endl;
+                                // }
                                 response="";
                                 close(all_df[i].fd);
                                 all_df.erase(all_df.begin() + i);
