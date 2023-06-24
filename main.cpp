@@ -89,9 +89,11 @@ int main(int argc, char** argv)
                         if(all_client[j].getfd() == all_df[i].fd)
                         {
                             all_client[j].appendreq(buff,content);
-                            all_client[j].addcontenlenght(content);
-                            if(content != 1024)
+                            all_client[j].addTocontentread(content);
+                            
+                            if(all_client[j].getcontentlenght() <= all_client[j].getcontentread())
                             {
+                                std::cout << all_client[j].getcontentlenght()<<"    "<<all_client[j].getcontentread()<<std::endl;
                                 std::string response = "HTTP/1.1 200 OK";
                                 response+= "Content-Length:" +  std::to_string(all_client[j].getreq().length()) + "\r\n\r\n";
                                 response += all_client[j].getreq();

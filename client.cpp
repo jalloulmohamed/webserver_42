@@ -37,8 +37,17 @@ std::string client::getreq() const
 
 void client::appendreq(char const *req, int count)
 {
+    if(!this->firstbuff)
+    {
+        this->firstbuff = true;
+        std::string input(req);
+        int firstposition = input.find("Content-Length:");
+        int lastposition = input.find("\n",firstposition);
+        this->contentread = -1 * lastposition;
+        std::string lent = input.substr(firstposition + 15,lastposition);
+        this->contentlenght= std::stoi(lent);
+    }
     
-
     this->req.append(req,count);
 }
 
@@ -53,7 +62,7 @@ long long client::getcontentlenght() const
 }
 void client::setfirstbuff(const bool firstbuffer)
 {
-    this->firstbuff = firstbuff;
+    this->firstbuff = firstbuffer;
 
 }
 bool client::getfirstbuff() const
@@ -70,3 +79,4 @@ long long client::getcontentread() const
 {
     return this->contentread;
 }
+
